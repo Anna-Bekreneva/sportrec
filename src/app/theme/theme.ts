@@ -34,7 +34,7 @@ export const theme = createTheme({
     MuiToolbar: {
       styleOverrides: {
         root: {
-          '@media (min-width:600px)': {
+          '@media (min-width:0)': {
             paddingLeft: 0,
             paddingRight: 0,
           },
