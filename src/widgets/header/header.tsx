@@ -22,7 +22,7 @@ import {
  * */
 
 type Props = {
-  isNewNotifications: boolean
+  isNewNotifications?: boolean
   userName?: string
 } // для userName и isNewNotifications установила значения по умолчанию для примера
 
