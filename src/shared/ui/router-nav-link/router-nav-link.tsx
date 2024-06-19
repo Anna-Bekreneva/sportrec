@@ -15,7 +15,7 @@ export const RouterNavLink = ({ children, className, to }: Props) => {
     isActive ? `${className} Mui-selected` : className
 
   const activeStyle = {
-    color: theme.palette.primary['700'],
+    color: theme.palette.primary[700],
     textDecoration: 'none',
   }
 

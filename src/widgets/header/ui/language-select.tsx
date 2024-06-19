@@ -17,7 +17,7 @@ export const LanguageSelect = () => {
     select: {
       '.MuiOutlinedInput-notchedOutline': { border: 0, padding: 0 },
       '.css-19xtc65-MuiSelect-icon': {
-        color: palette.primary['400'],
+        color: palette.primary[400],
         top: '50%',
         transform: 'translateY(-50%)',
       },
@@ -29,7 +29,7 @@ export const LanguageSelect = () => {
   return (
     <FormControl>
       <InputLabel id={'language-select-label'} style={visuallyHidden}>
-        Choose language
+        Выберите язык
       </InputLabel>
       <Select
         IconComponent={ChevronIcon}

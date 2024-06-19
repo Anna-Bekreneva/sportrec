@@ -8,7 +8,7 @@ type Props = {
 }
 export const Menu = ({ navItems }: Props) => {
   return (
-    <List sx={{ display: 'flex', gap: '30px' }}>
+    <List sx={{ display: 'flex', gap: '27px' }}>
       {navItems.map(item => (
         <ListItem disablePadding key={item.href}>
           <MenuLink {...item} />

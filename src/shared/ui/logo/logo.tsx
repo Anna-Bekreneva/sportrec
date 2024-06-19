@@ -6,7 +6,7 @@ import { Link } from '@mui/material'
 export const Logo = () => {
   return (
     <Link component={RouterLink} to={AppRoutes.MAIN}>
-      <img alt={'logo'} height={32} src={'./logo.svg'} width={130} />
+      <img alt={'Логотип'} height={32} src={'./logo.svg'} width={130} />
     </Link>
   )
 }

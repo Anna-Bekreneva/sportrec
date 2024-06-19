@@ -1,7 +1,15 @@
 import { NavLink, RouterNavLink, getIcon } from '@/shared'
 import { Box, Link } from '@mui/material'
 
-export const MenuLink = ({ href, name, ...rest }: NavLink) => {
+type Props = {
+  isIcon?: boolean
+} & NavLink
+
+/**
+  Компонент MenuLink отрисовывет NavLink из react-router-dom
+ Нужен для корректный работы с MUI и для выделения активной ссылки
+ */
+export const MenuLink = ({ href, isIcon = true, name, ...rest }: Props) => {
   return (
     <Link
       component={RouterNavLink}
@@ -11,9 +19,11 @@ export const MenuLink = ({ href, name, ...rest }: NavLink) => {
       variant={'body1'}
       {...rest}
     >
-      <Box aria-hidden component={'span'} sx={{ height: '18px', width: '18px' }}>
-        {getIcon(href)}
-      </Box>
+      {isIcon && (
+        <Box aria-hidden component={'span'} sx={{ height: '18px', width: '18px' }}>
+          {getIcon(href)}
+        </Box>
+      )}
       {name}
     </Link>
   )

@@ -17,6 +17,32 @@ const grayScale = {
 }
 
 export const theme = createTheme({
+  components: {
+    MuiContainer: {
+      styleOverrides: {
+        root: {
+          '@media (min-width:600px)': {
+            paddingLeft: '16px',
+            paddingRight: '16px',
+          },
+          '@media (min-width:1200px)': {
+            maxWidth: '1192px',
+          },
+        },
+      },
+    },
+    MuiToolbar: {
+      styleOverrides: {
+        root: {
+          '@media (min-width:600px)': {
+            paddingLeft: 0,
+            paddingRight: 0,
+          },
+          alignItems: 'center',
+        },
+      },
+    },
+  },
   palette: {
     background: {
       default: '#f1f3f7',
@@ -31,7 +57,6 @@ export const theme = createTheme({
     primary: {
       ...grayScale,
     },
-    // Определите другие цвета, если необходимо
   },
   typography: {
     body1: {
@@ -41,8 +66,5 @@ export const theme = createTheme({
       lineHeight: '20px',
     },
     fontFamily: 'Inter',
-
-    // Определите стили шрифтов здесь
   },
-  // Добавьте другие настройки темы, такие как отступы, размеры и т.д.
 })
