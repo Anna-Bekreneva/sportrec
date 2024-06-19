@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { ReactNode, forwardRef } from 'react'
 import { NavLink as NavLinkBase } from 'react-router-dom'
 
 import { useTheme } from '@mui/material'
@@ -9,23 +9,32 @@ type Props = {
   to: string
 }
 
-export const RouterNavLink = ({ children, className, to }: Props) => {
-  const theme = useTheme()
-  const getClassName = ({ isActive }: { isActive: boolean }) =>
-    isActive ? `${className} Mui-selected` : className
+/**
+ Компонент RouterNavLink отрисовывет NavLink из react-router-dom и принимает children
+ RouterNavLink Нужен для корректный работы с MUI и для выделения активной ссылки
+ Компонент обернут в forwardRef, потому что NavLink из react-router-dom не принимает ref, а MUI его отдает
+ */
 
-  const activeStyle = {
-    color: theme.palette.primary[700],
-    textDecoration: 'none',
+export const RouterNavLink = forwardRef<HTMLAnchorElement, Props>(
+  ({ children, className, to }, ref) => {
+    const theme = useTheme()
+    const getClassName = ({ isActive }: { isActive: boolean }) =>
+      isActive ? `${className} Mui-selected` : className
+
+    const activeStyle = {
+      color: theme.palette.primary[700],
+      textDecoration: 'none',
+    }
+
+    return (
+      <NavLinkBase
+        className={getClassName}
+        ref={ref}
+        style={({ isActive }) => (isActive ? activeStyle : {})}
+        to={to}
+      >
+        {children}
+      </NavLinkBase>
+    )
   }
-
-  return (
-    <NavLinkBase
-      className={getClassName}
-      style={({ isActive }) => (isActive ? activeStyle : {})}
-      to={to}
-    >
-      {children}
-    </NavLinkBase>
-  )
-}
+)
