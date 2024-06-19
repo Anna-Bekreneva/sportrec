@@ -1,17 +1,23 @@
-import { useState } from 'react'
-
 import { ChevronIcon } from '@/shared'
-import { LanguagesValue, languageItems, languages } from '@/widgets/header/model'
-import { FormControl, InputLabel, MenuItem, Select, useTheme } from '@mui/material'
+import { Language, LanguagesValue, languageItems } from '@/widgets/header/model'
+import { SelectItem } from '@/widgets/header/ui'
+import { FormControl, InputLabel, MenuItem, Select, SxProps, Theme, useTheme } from '@mui/material'
 import { visuallyHidden } from '@mui/utils'
 
-import { SelectItem } from './language-select-item'
+export type LanguageSelectProps = {
+  changeValue: (value: LanguagesValue) => void
+  currentItem?: Language
+  sx?: SxProps<Theme>
+  value: LanguagesValue
+}
 
-export const LanguageSelect = () => {
+export const LanguageSelect = ({
+  changeValue,
+  currentItem,
+  sx: style,
+  value,
+}: LanguageSelectProps) => {
   const { palette } = useTheme()
-  const [value, setValue] = useState<LanguagesValue>(languages.russia)
-
-  const currentLabel = languageItems.find(language => language.value === value)
 
   const styles = {
     select: {
@@ -23,6 +29,7 @@ export const LanguageSelect = () => {
       },
       '::before': { display: 'none' },
       boxShadow: 'none',
+      ...style,
     },
   }
 
@@ -35,8 +42,8 @@ export const LanguageSelect = () => {
         IconComponent={ChevronIcon}
         id={'language-select'}
         labelId={'language-select-label'}
-        onChange={event => setValue(event.target.value as LanguagesValue)}
-        renderValue={() => <SelectItem {...currentLabel} />}
+        onChange={event => changeValue(event.target.value as LanguagesValue)}
+        renderValue={() => <SelectItem {...currentItem} />}
         style={{ marginTop: 0 }}
         sx={styles.select}
         value={value}
