@@ -5,10 +5,6 @@ type Props = {
   isIcon?: boolean
 } & NavLink
 
-/**
-  Компонент MenuLink отрисовывет NavLink из react-router-dom
- Нужен для корректный работы с MUI и для выделения активной ссылки
- */
 export const MenuLink = ({ href, isIcon = true, name, ...rest }: Props) => {
   return (
     <Link
