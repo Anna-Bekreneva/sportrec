@@ -1,20 +1,15 @@
 import React, { useState } from 'react'
 
 import { ChevronIcon } from '@/shared'
-import { profileNavItems } from '@/widgets/header/model'
-import { MenuLink } from '@/widgets/header/ui/menu-link'
-import { Avatar, Box, Button, ListItem, Menu, useTheme } from '@mui/material'
+import { ProfileAvatar, ProfileAvatarProps, ProfileList } from '@/widgets/header/ui'
+import { Box, Button, Menu, useTheme } from '@mui/material'
 
 /**
  * src — сама автарка. Подразумевается, что изображение будет приходить с сервера
  * Но может быть такое, что у пользователя нет аватрки. В таком случае выведим круг с фоновым цветом и первую букву имени
  */
 
-type Props = {
-  src?: string
-  userName: string
-}
-export const ProfileDropdown = ({ src, userName }: Props) => {
+export const ProfileDropdown = (props: ProfileAvatarProps) => {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null)
   const { palette } = useTheme()
   const open = !!anchorEl
@@ -30,40 +25,25 @@ export const ProfileDropdown = ({ src, userName }: Props) => {
         aria-expanded={open ? 'true' : undefined}
         aria-haspopup={'true'}
         aria-label={'Навигация профиля'}
-        id={'basic-button'}
+        id={'profile-dropdown-trigger'}
         onClick={handleClick}
         sx={{ display: 'flex', gap: '8px', paddingLeft: 0, paddingRight: 0 }}
       >
-        <Avatar
-          alt={userName}
-          sizes={'36px'}
-          src={src}
-          sx={
-            !src
-              ? { bgcolor: palette.primary[700], height: '36px', width: '36px' }
-              : { height: '36px', width: '36px' }
-          }
-        >
-          {!src && userName[0]}
-        </Avatar>
+        <ProfileAvatar {...props} />
         <Box aria-hidden sx={{ color: palette.primary[400], height: '20px', width: '20px' }}>
           <ChevronIcon />
         </Box>
       </Button>
       <Menu
         MenuListProps={{
-          'aria-labelledby': 'basic-button',
+          'aria-labelledby': 'profile-dropdown-trigger',
         }}
         anchorEl={anchorEl}
         id={'profile-menu'}
         onClose={handleClose}
         open={open}
       >
-        {profileNavItems.map(item => (
-          <ListItem disablePadding key={item.href}>
-            <MenuLink isIcon={false} {...item} />
-          </ListItem>
-        ))}
+        <ProfileList />
       </Menu>
     </div>
   )
