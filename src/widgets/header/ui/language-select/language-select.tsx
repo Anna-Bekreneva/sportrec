@@ -28,6 +28,7 @@ export const LanguageSelect = ({
         transform: 'translateY(-50%)',
       },
       '::before': { display: 'none' },
+      alignItems: 'center',
       boxShadow: 'none',
       ...style,
     },
